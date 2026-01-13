@@ -1,9 +1,12 @@
 SRC = ./src
 BLD = ./build
 
-build: $(SRC)/*.asm
-	nasm -f elf64 $(SRC)/*.asm -o $(BLD)/main.o
+.PHONY: build clean all
+
+$(BLD): $(SRC)/*.s
+	mkdir $(BLD)
+	nasm -f elf64 $(SRC)/*.s -o $(BLD)/main.o
 	ld $(BLD)/main.o -o $(BLD)/main
 
 clean:
-	rm -rf $(BLD)/*
+	rm -rf $(BLD)
